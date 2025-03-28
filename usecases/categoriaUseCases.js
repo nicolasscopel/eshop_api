@@ -50,37 +50,32 @@ const updateCategoriaDB = async (body) => {
 
 
 const deleteCategoriaDB = async (codigo) => {
-    try {
-        const results = await pool.query(`DELETE FROM categorias 
-            WHERE codigo = $1`,[codigo]);
-        
-        if(results.rowCount == 0){
-            throw `Nenhum registro encontrado com o código ${codigo}
-            para ser removido`;
+    try {           
+        const results = await pool.query(`DELETE FROM categorias where codigo = $1`,
+        [codigo]);
+        if (results.rowCount == 0){
+            throw `Nenhum registro encontrado com o código ${codigo} para ser removido`;
         } else {
-            return "Categoria removida com sucesso! ";
-        }
-
+            return "Categoria removida com sucesso";
+        }       
     } catch (err) {
-        throw "Erro ao deletar a categoria!" + err;
-    }
+        throw "Erro ao remover a categoria: " + err;
+    }     
 }
 
 const getCategoriaPorCodigoDB = async (codigo) => {
-    try {
-        const results = await pool.query(`SELECT * FROM categorias 
-            WHERE codigo = $1`,[codigo]);
-        
-        if(results.rowCount == 0){
-            throw `Nenhum registro encontrado com o código ${codigo}`;
+    try {           
+        const results = await pool.query(`SELECT * FROM categorias where codigo = $1`,
+        [codigo]);
+        if (results.rowCount == 0){
+            throw "Nenhum registro encontrado com o código: " + codigo;
         } else {
             const categoria = results.rows[0];
-            return new Categoria(categoria.codigo, categoria.nome);1
-        }
-
+            return new Categoria(categoria.codigo, categoria.nome); 
+        }       
     } catch (err) {
-        throw "Erro ao recuperar a categoria!" + err;
-    }
+        throw "Erro ao recuperar a categoria: " + err;
+    }     
 }
 
 

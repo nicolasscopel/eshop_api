@@ -34,25 +34,24 @@ const updateCategoria = async (request, response) => {
         }))
 }
 
-const deleteCategoria = async (codigo) => {
-    await deleteCategoriaDB(request.params.codigo)
+const deleteCategoria = async (request, response) => {
+    await deleteCategoriaDB(parseInt(request.params.codigo))
         .then(data => response.status(200).json({
-            "status" : "success" , "message" : data
-          
+            status: "success", message: data
         }))
-        .catch(err => response.status(400).json ({
+        .catch(err => response.status(400).json({
             status: 'error',
-            message : err
-        }))
+            message: err
+        }));        
 }
 
-const getCategoriaPorCodigo = async (codigo) => {
-    await getCategoriaPorCodigoDB(request.params.codigo)
+const getCategoriaPorCodigo= async (request, response) => {
+    await getCategoriaPorCodigoDB(parseInt(request.params.codigo))
         .then(data => response.status(200).json(data))
-        .catch(err => response.status(400).json ({
+        .catch(err => response.status(400).json({
             status: 'error',
-            message : err
-        }))
+            message: err
+        }));           
 }
 
 
