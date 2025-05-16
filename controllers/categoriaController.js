@@ -3,6 +3,10 @@ const { getCategoriasDB,  addCategoriaDB, updateCategoriaDB,
 
 const getCategorias = async (request, response) => {
     await getCategoriasDB()
+
+       // const usuario = request.usuario;
+        //console.log('Usuario recebido no token: ' + JSON.stringify(usuario))
+
         .then(data => response.status(200).json(data))
         .catch(err => response.status(400).json ({
             status: 'error',
